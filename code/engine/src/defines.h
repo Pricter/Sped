@@ -1,10 +1,5 @@
 #pragma once
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdlib.h>
-
 // Unsigned
 typedef unsigned char u8;
 typedef unsigned short u16;

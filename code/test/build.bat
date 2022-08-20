@@ -10,7 +10,7 @@ SET assembly=test
 SET compilerFlags=-g 
 REM -Wall -Werror
 SET includeFlags=-Isrc -I../engine/src/
-SET linkerFlags=-L../bin/ -lengine.lib
+SET linkerFlags=-L../bin/ -llibengine
 SET defines=-D_DEBUG -DKIMPORT
 
 ECHO "Building %assembly%%..."

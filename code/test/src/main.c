@@ -1,22 +1,18 @@
 #include <core/asserts.h>
-#include <platform/platform.h>
 #include <core/logger.h>
 
-int main() {
-    SFATAL("A test message: %f", 3.14);
-    SERROR("A test message: %f", 3.14);
-    SWARN("A test message: %f", 3.14);
-    SINFO("A test message: %f", 3.14);
-    SDEBUG("A test message: %f", 3.14);
-    STRACE("A test message: %f", 3.14);
+#include <core/application.h>
 
-    platform_state state;
-    if(platform_startup(&state, "Sped Engine test", 100, 100, 1920, 1080)) {
-        while(TRUE) {
-            platform_pump_messages(&state);
-        }
-    }
-    platform_shutdown(&state);
+int main() {
+    application_config config;
+    config.start_pos_x = 100;
+    config.start_pos_y = 100;
+    config.start_width = 1920;
+    config.start_height = 1080;
+    config.name = "Sped Engine Test";
+
+    application_create(&config);
+    application_run();
 
     return 0;
 }

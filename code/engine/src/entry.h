@@ -2,11 +2,14 @@
 
 #include "core/application.h"
 #include "core/logger.h"
+#include "core/smemory.h"
 #include "game_types.h"
 
 extern b8 create_game(game* out_game);
 
 int main() {
+    initialize_memory();
+
     game game_inst;
     if(!create_game(&game_inst)) {
         SFATAL("Could not create game!");
@@ -28,7 +31,7 @@ int main() {
         return 2;
     }
 
-    application_config config;
+    shutdown_memory();
 
     return 0;
 }

@@ -32,6 +32,14 @@
         "windowsx.h": "c",
         "vulkan_platform.h": "c",
         "renderer_frontend.h": "c",
-        "platform.h": "c"
+        "platform.h": "c",
+        "application.h": "c",
+        "logger.h": "c",
+        "game_types.h": "c",
+        "defines.h": "c",
+        "string.h": "c",
+        "stdarg.h": "c",
+        "stdio.h": "c",
+        "stdlib.h": "c"
     }
 }

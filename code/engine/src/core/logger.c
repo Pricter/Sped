@@ -2,6 +2,9 @@
 #include "asserts.h"
 #include "platform/platform.h"
 
+#include <stdio.h>
+#include <string.h>
+
 b8 initialize_logging() {
     // TODO: create log file
     return TRUE;
@@ -11,7 +14,7 @@ void shutdown_logging() {
     // TODO: Cleanup
 }
 
-SAPI void log_output(log_level level, const char* message, ...) {
+void log_output(log_level level, const char* message, ...) {
     const char* level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARN]: ", "[INFO]: ", "[DEBUG]: ", "[TRACE]: "};
     b8 is_error = level < LOG_LEVEL_WARN;
 
@@ -33,7 +36,6 @@ SAPI void log_output(log_level level, const char* message, ...) {
         platform_console_write(out_message2, level);
     }
 }
-
 
 void report_assertion_failure(const char* expression, const char* message, const char* file, i32 line) {
     log_output(LOG_LEVEL_FATAL, "Assertion Failure: %s, message: '%s', in file: %s, line: %d\n", expression, message, file, line);

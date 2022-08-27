@@ -6,6 +6,9 @@
 #include "platform/platform.h"
 #include "core/smemory.h"
 
+#include "core/event.h"
+#include "core/input.h"
+
 typedef struct application_state {
     game* game_inst;
     b8 is_running;
@@ -28,6 +31,7 @@ b8 application_create(game* game_inst) {
     app_state.game_inst = game_inst;
 
     initialize_logging();
+    input_initialize();
 
     // TODO: Remove this
     SFATAL("A test message: %f", 3.14);
@@ -39,6 +43,11 @@ b8 application_create(game* game_inst) {
 
     app_state.is_running = TRUE;
     app_state.is_suspended = FALSE;
+
+    if(!event_initialize()) {
+        SERROR("Event system failed initialization. Application cannot continue.");
+        return FALSE;
+    }
 
     if(!platform_startup(&app_state.platform,
                         game_inst->app_config.start_pos_x,
@@ -80,9 +89,14 @@ b8 application_run() {
                 app_state.is_running = FALSE;
                 break;
             }
+
+            input_update(0);
         }
     }
     app_state.is_running = FALSE;
+
+    event_shutdown();
     platform_shutdown(&app_state.platform);
+
     return TRUE;
 }

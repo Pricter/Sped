@@ -20,15 +20,15 @@
         },
         {
             "type": "shell",
-            "label": "Build Testbed",
+            "label": "Build Test",
             "windows": {
-                "command": "${workspaceFolder}/testbed/build.bat"
+                "command": "${workspaceFolder}/test/build.bat"
             },
             "linux": {
-                "command": "${workspaceFolder}/testbed/build.sh"
+                "command": "${workspaceFolder}/test/build.sh"
             },
             "options": {
-                "cwd": "${workspaceFolder}/testbed"
+                "cwd": "${workspaceFolder}/test"
             },
             "problemMatcher": [
                 "$gcc"

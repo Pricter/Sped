@@ -41,6 +41,14 @@
         "stdarg.h": "c",
         "stdio.h": "c",
         "stdlib.h": "c",
-        "smemory.h": "c"
+        "smemory.h": "c",
+        "corecrt_malloc.h": "c",
+        "corecrt.h": "c",
+        "vcruntime.h": "c",
+        "vadefs.h": "c",
+        "corecrt_wstdlib.h": "c",
+        "sstring.h": "c",
+        "vulkan_win32.h": "c",
+        "xmemory": "c"
     }
 }

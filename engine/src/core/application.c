@@ -41,14 +41,6 @@ b8 application_create(game* game_inst) {
     initialize_logging();
     input_initialize();
 
-    // TODO: Remove this
-    SFATAL("A test message: %f", 3.14);
-    SERROR("A test message: %f", 3.14);
-    SWARN("A test message: %f", 3.14);
-    SINFO("A test message: %f", 3.14);
-    SDEBUG("A test message: %f", 3.14);
-    STRACE("A test message: %f", 3.14);
-
     app_state.is_running = TRUE;
     app_state.is_suspended = FALSE;
 

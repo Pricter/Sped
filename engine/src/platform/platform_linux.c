@@ -2,6 +2,8 @@
 
 #ifdef SPLATFORM_LINUX
 
+#include "containers/darray.h"
+
 #include "core/logger.h"
 #include "core/event.h"
 #include "core/input.h"
@@ -12,6 +14,10 @@
 #include <X11/Xlib.h>
 #include <X11/Xlib-xcb.h>
 #include <sys/time.h>
+
+#define VK_USE_PLATFORM_XCB_KHR
+#include <vulkan/vulkan.h>
+#include "renderer/vulkan/vulkan_types.inl"
 
 #if _POSIX_C_SOURCE >= 199309L
 #include <time.h>
@@ -26,6 +32,7 @@ typedef struct internal_state {
     xcb_screen_t *screen;
     xcb_atom_t wm_protocols;
     xcb_atom_t wm_delete_win;
+    VkSurfaceKHR surface;
 } internal_state;
 
 keys translate_keycode(u32 x_keycode);
@@ -247,6 +254,30 @@ void platform_sleep(u64 ms) {
     }
     usleep((ms % 1000) * 1000);
 #endif
+}
+
+void platform_get_required_extension_names(const char ***names_darray) {
+    darray_push(*names_darray, &"VK_KHR_xcb_surface"); // NOTE: Can use xlib
+}
+
+b8 platform_create_vulkan_surface(platform_state* plat_state,
+                                  vulkan_context* context)
+{
+    internal_state *state = (internal_state *)plat_state->internal_state;
+
+    VkXcbSurfaceCreateInfoKHR create_info = {VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR};
+    create_info.connection = state->connection;
+    create_info.window = state->window;
+
+    VkResult result = vkCreateXcbSurfaceKHR(context->instance,
+                        &create_info, context->allocator, &state->surface);
+    if(result != VK_SUCCESS) {
+        SFATAL("Vulkan surface creation failed.");
+        return FALSE;
+    }
+
+    context->surface = state->surface;
+    return TRUE;
 }
 
 keys translate_keycode(u32 x_keycode) {

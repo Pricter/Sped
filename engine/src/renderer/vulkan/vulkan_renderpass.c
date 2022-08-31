@@ -18,7 +18,7 @@ void vulkan_renderpass_create(
     VkAttachmentDescription attachment_descriptions[attachment_description_count];
 
     VkAttachmentDescription color_attachment;
-    color_attachment.format = context->swaphain.image_format.format;
+    color_attachment.format = context->swapchain.image_format.format;
     color_attachment.samples = VK_SAMPLE_COUNT_1_BIT;
     color_attachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
     color_attachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;

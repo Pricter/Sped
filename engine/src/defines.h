@@ -92,3 +92,5 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 Bytes.");
 #define SAPI
 #endif
 #endif
+
+#define SCLAMP(value, min, max) (value <= min) ? min : (value >= max) ? max : value;

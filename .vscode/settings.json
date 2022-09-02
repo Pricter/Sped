@@ -49,6 +49,17 @@
         "corecrt_wstdlib.h": "c",
         "sstring.h": "c",
         "vulkan_win32.h": "c",
-        "xmemory": "c"
+        "xmemory": "c",
+        "tuple": "c",
+        "utility": "c",
+        "vector": "c",
+        "xstring": "c",
+        "vulkan_swapchain.h": "c",
+        "vulkan_command_buffer.h": "c",
+        "vulkan_fence.h": "c",
+        "vulkan_renderpass.h": "c",
+        "vulkan_image.h": "c",
+        "vulkan_utils.h": "c",
+        "vulkan_types.inl": "c"
     }
 }

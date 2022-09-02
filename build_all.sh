@@ -1,24 +1,14 @@
-set echo on
-
 echo "Building everything..."
 
-pushd engine
-source build.sh
-popd
+make -f Makefile.engine.linux.mak all
 
 ERRORLEVEL=$?
 if [ $ERRORLEVEL -ne 0 ]
 then
-echo "Error:"$ERRORLEVEL && exit
+echo "Error:"$ERRORLEVEL
 fi
 
-pushd test
-source build.sh
-popd
+make -f Makefile.test.linux.mak all
 ERRORLEVEL=$?
 if [ $ERRORLEVEL -ne 0 ]
 then
-echo "Error:"$ERRORLEVEL && exit
-fi
-
-echo "All assemblies built successfully."

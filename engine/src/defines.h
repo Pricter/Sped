@@ -93,4 +93,12 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 Bytes.");
 #endif
 #endif
 
-#define SCLAMP(value, min, max) (value <= min) ? min : (value >= max) ? max : value;
+#define SCLAMP(value, min, max) (value <= min) ? min : (value >= max)
+
+#ifdef _MSC_VER
+#define SINLINE __forceinline
+#define SNOINLINE __declspec(noinline)
+#else
+#define SINLINE static inline
+#define SNOINLINE
+#endif

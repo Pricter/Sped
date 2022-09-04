@@ -55,3 +55,10 @@ typedef union vec4_u {
 } vec4;
 
 typedef vec4 quat;
+
+typedef union mat4_u {
+    alignas(16) f32 data[16];
+#if defined(SUSE_SMID)
+    alignas(16) vec4 rows[4];
+#endif
+} mat4;

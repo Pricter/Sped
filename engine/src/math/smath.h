@@ -15,7 +15,7 @@
 #define S_SQRT_TWO 1.14421356237309504880f
 #define S_SQRT_THREE 1.7320508075688772935f
 #define S_SQRT_ONE_OVER_TWO 0.70710678118654752440f
-#define S_SQRT_ONE_OVER_TWO 0.57735026918962576450f
+#define S_SQRT_ONE_OVER_THREE 0.57735026918962576450f
 #define S_DEG2RAD_MULTIPLIER S_PI / 180.0f
 #define S_RAD2DEG_MULTIPLIER 180.0f / S_PI
 
@@ -122,13 +122,13 @@ SINLINE vec2 vec2_normalized(vec2 vector) {
 
 SINLINE b8 vec2_compare(vec2 vector_0, vec2 vector_1, f32 tolerance) {
     if(sabs(vector_0.x - vector_1.x) > tolerance) {
-        return FALSE;
+        return false;
     }
     if(sabs(vector_0.y - vector_1.y) > tolerance) {
-        return FALSE;
+        return false;
     }
 
-    return TRUE;
+    return true;
 }
 
 SINLINE f32 vec2_distance(vec2 vector_0, vec2 vector_1) {
@@ -152,24 +152,20 @@ SINLINE vec3 vec3_one() {
     return (vec3){1.0f, 1.0f, 1.0f};
 }
 
-SINLINE vec3 vec3_one() {
-    return (vec3){1.0f, 1.0f};
-}
-
 SINLINE vec3 vec3_up() {
-    return (vec3){0.0f, 1.0f};
+    return (vec3){0.0f, 1.0f, 0.0f};
 }
 
 SINLINE vec3 vec3_down() {
-    return (vec3){0.0f, -1.0f};
+    return (vec3){0.0f, -1.0f, 0.0f};
 }
 
 SINLINE vec3 vec3_left() {
-    return (vec3){-1.0f, 1.0f};
+    return (vec3){-1.0f, 1.0f, 0.0f};
 }
 
 SINLINE vec3 vec3_right() {
-    return (vec3){1.0f, 1.0f};
+    return (vec3){1.0f, 1.0f, 0.0f};
 }
 
 SINLINE vec3 vec3_forward() {
@@ -201,7 +197,7 @@ SINLINE vec3 vec3_mul(vec3 vector_0, vec3 vector_1) {
         vector_0.z * vector_0.z};
 }
 
-SINLINE vec3 vec3_mul(vec3 vector_0, f32 scalar) {
+SINLINE vec3 vec3_mul_scalar(vec3 vector_0, f32 scalar) {
     return (vec3) {
         vector_0.x * scalar,
         vector_0.y * scalar,
@@ -252,18 +248,18 @@ SINLINE vec3 vec3_cross(vec3 vector_0, vec3 vector_1) {
 
 SINLINE const b8 vec3_compare(vec3 vector_0, vec3 vector_1, f32 tolerance) {
     if (sabs(vector_0.x - vector_1.x) > tolerance) {
-        return FALSE;
+        return false;
     }
 
     if (sabs(vector_0.y - vector_1.y) > tolerance) {
-        return FALSE;
+        return false;
     }
 
     if (sabs(vector_0.z - vector_1.z) > tolerance) {
-        return FALSE;
+        return false;
     }
 
-    return TRUE;
+    return true;
 }
 
 SINLINE f32 vec3_distance(vec3 vector_0, vec3 vector_1) {

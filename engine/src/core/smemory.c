@@ -51,7 +51,7 @@ void* sallocate(u64 size, memory_tag tag) {
     stats.tagged_allocations[tag] += size;
 
     // TODO: Memory Alignment
-    void* block = platform_allocate(size, FALSE);
+    void* block = platform_allocate(size, false);
     platform_zero_memory(block, size);
     return block;
 }
@@ -65,7 +65,7 @@ void sfree(void* block, u64 size, memory_tag tag) {
     stats.tagged_allocations[tag] -= size;
 
     // TODO: Memory Alignment
-    platform_free(block, FALSE);
+    platform_free(block, false);
 }
 
 void* szero_memory(void* block, u64 size) {

@@ -4,7 +4,7 @@ OBJ_DIR := obj
 
 ASSEMBLY := test
 EXTENSION := .exe
-COMPILER_FLAGS := -g -Wno-missing-braces -fdeclspec #-fPIC
+COMPILER_FLAGS := -g -MD -Werror=vla -fdeclspec #-fPIC
 INCLUDE_FLAGS := -Iengine\src -Itestbed\src 
 LINKER_FLAGS := -g -lengine.lib -L$(OBJ_DIR)\engine -L$(BUILD_DIR)
 DEFINES := -D_DEBUG -DSPEDIMPORT

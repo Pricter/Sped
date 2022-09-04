@@ -20,18 +20,18 @@ typedef struct input_state {
     mouse_state mouse_previous;
 } input_state;
 
-static b8 initialized = FALSE;
+static b8 initialized = false;
 static input_state state = {};
 
 void input_initialize() { 
     szero_memory(&state, sizeof(input_state));
-    initialized = TRUE;
+    initialized = true;
     SINFO("Input subsystem initialized.");
 }
 
 void input_shutdown() {
     // TODO: Add shutdown routines when needed
-    initialized = FALSE;
+    initialized = false;
 }
 
 void input_update(f64 delta_time) {
@@ -46,6 +46,20 @@ void input_update(f64 delta_time) {
 void input_process_key(keys key, b8 pressed) {
     if(state.keyboard_current.keys[key] != pressed) {
         state.keyboard_current.keys[key] = pressed;
+
+        if(key == KEY_LALT) {
+            SINFO("Left alt pressed.");
+        } else if(key == KEY_RALT) {
+            SINFO("Right alt pressed.");
+        } else if(key == KEY_LCONTROL) {
+            SINFO("Left ctrl pressed.");
+        } else if(key == KEY_RCONTROL) {
+            SINFO("Right ctrl pressed.");
+        } else if(key == KEY_LSHIFT) {
+            SINFO("Left shift pressed.");
+        } else if(key == KEY_RSHIFT) {
+            SINFO("Right shift pressed.");
+        }
 
         event_context context;
         context.data.u16[0] = key;
@@ -86,58 +100,58 @@ void input_process_mouse_wheel(i8 z_delta) {
 
 b8 input_is_key_down(keys key) {
     if(!initialized) {
-        return FALSE;
+        return false;
     }
-    return state.keyboard_current.keys[key] == TRUE;
+    return state.keyboard_current.keys[key] == true;
 }
 
 b8 input_is_key_up(keys key) {
     if(!initialized) {
-        return FALSE;
+        return false;
     }
-    return state.keyboard_current.keys[key] == FALSE;
+    return state.keyboard_current.keys[key] == false;
 }
 
 b8 input_was_key_down(keys key) {
     if(!initialized) {
-        return FALSE;
+        return false;
     }
-    return state.keyboard_previous.keys[key] == TRUE;
+    return state.keyboard_previous.keys[key] == true;
 }
 
 b8 input_was_key_up(keys key) {
     if(!initialized) {
-        return TRUE;
+        return true;
     }
-    return state.keyboard_previous.keys[key] == FALSE;
+    return state.keyboard_previous.keys[key] == false;
 }
 
 b8 input_is_button_down(buttons button) {
     if(!initialized) {
-        return FALSE;
+        return false;
     }
-    return state.mouse_current.buttons[button] == TRUE;
+    return state.mouse_current.buttons[button] == true;
 }
 
 b8 input_is_button_up(buttons button) {
     if(!initialized) {
-        return TRUE;
+        return true;
     }
-    return state.mouse_current.buttons[button] == FALSE;
+    return state.mouse_current.buttons[button] == false;
 }
 
 b8 input_was_button_down(buttons button) {
     if(!initialized) {
-        return FALSE;
+        return false;
     }
-    return state.mouse_previous.buttons[button] == TRUE;
+    return state.mouse_previous.buttons[button] == true;
 }
 
 b8 input_was_button_up(buttons button) {
     if(!initialized) {
-        return TRUE;
+        return true;
     }
-    return state.mouse_previous.buttons[button] == FALSE;
+    return state.mouse_previous.buttons[button] == false;
 }
 
 void input_get_mouse_position(i32* x, i32* y) {

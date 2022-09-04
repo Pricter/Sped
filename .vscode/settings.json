@@ -60,6 +60,9 @@
         "vulkan_renderpass.h": "c",
         "vulkan_image.h": "c",
         "vulkan_utils.h": "c",
-        "vulkan_types.inl": "c"
+        "vulkan_types.inl": "c",
+        "algorithm": "cpp",
+        "memory": "cpp",
+        "limits": "cpp"
     }
 }

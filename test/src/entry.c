@@ -15,5 +15,5 @@ b8 create_game(game* out_game) {
 
     out_game->state = sallocate(sizeof(game_state), MEMORY_TAG_GAME);
 
-    return TRUE;
+    return true;
 }

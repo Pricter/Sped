@@ -8,7 +8,7 @@ I originally thought of the name sped from speed which people often say vulkan i
 This supports Windows, Linux and Mac. Mac uses GLFW for Window creation while Windows and Linux use native libraries. Android and iOS support will be added
 
 ## .start
-First clone this repository: `https://github.com/travisvroman/kohi`
+First clone this repository: `https://github.com/Pricter/sped`
 
 Requirements:
     - Clang: https://releases.llvm.org/download.html

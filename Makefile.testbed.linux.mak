@@ -1,12 +1,12 @@
 BUILD_DIR := bin
 OBJ_DIR := obj
 
-ASSEMBLY := engine
-EXTENSION := .so
+ASSEMBLY := testbed
+EXTENSION := 
 COMPILER_FLAGS := -g -MD -Werror=vla -fdeclspec -fPIC
-INCLUDE_FLAGS := -Iengine/src -I$(VULKAN_SDK)/include
-LINKER_FLAGS := -g -shared -lvulkan -lxcb -lX11 -lX11-xcb -lxkbcommon -L$(VULKAN_SDK)/lib -L/usr/X11R6/lib
-DEFINES := -D_DEBUG -DKEXPORT
+INCLUDE_FLAGS := -Iengine/src -I$(VULKAN_SDK)\include
+LINKER_FLAGS := -L./$(BUILD_DIR)/ -lengine -Wl,-rpath,.
+DEFINES := -D_DEBUG -DKIMPORT
 
 SRC_FILES := $(shell find $(ASSEMBLY) -name *.c)
 DIRECTORIES := $(shell find $(ASSEMBLY) -type d)
@@ -23,7 +23,7 @@ scaffold:
 .PHONY: link
 link: scaffold $(OBJ_FILES)
 	@echo Linking $(ASSEMBLY)...
-	@clang $(OBJ_FILES) -o $(BUILD_DIR)/lib$(ASSEMBLY)$(EXTENSION) $(LINKER_FLAGS)
+	clang $(OBJ_FILES) -o $(BUILD_DIR)/$(ASSEMBLY)$(EXTENSION) $(LINKER_FLAGS)
 
 .PHONY: compile
 compile:

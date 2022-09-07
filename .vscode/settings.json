@@ -23,7 +23,7 @@
         "isWholeLine": false,
     },
     "files.associations": {
-        "test.h": "c",
+        "testbed.h": "c",
         "vulkan.h": "c",
         "vulkan_core.h": "c",
         "vk_platform.h": "c",
@@ -63,6 +63,8 @@
         "vulkan_types.inl": "c",
         "algorithm": "cpp",
         "memory": "cpp",
-        "limits": "cpp"
+        "limits": "cpp",
+        "darray.h": "c",
+        "test_manager.h": "c"
     }
 }

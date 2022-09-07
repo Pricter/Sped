@@ -1,12 +1,12 @@
 BUILD_DIR := bin
 OBJ_DIR := obj
 
-ASSEMBLY := test
+ASSEMBLY := tests
 EXTENSION := 
 COMPILER_FLAGS := -g -MD -Werror=vla -fdeclspec -fPIC
 INCLUDE_FLAGS := -Iengine/src -I$(VULKAN_SDK)\include
 LINKER_FLAGS := -L./$(BUILD_DIR)/ -lengine -Wl,-rpath,.
-DEFINES := -D_DEBUG -DKIMPORT
+DEFINES := -D_DEBUG -DSPEDIMPORT
 
 SRC_FILES := $(shell find $(ASSEMBLY) -name *.c)
 DIRECTORIES := $(shell find $(ASSEMBLY) -type d)
@@ -31,9 +31,11 @@ compile:
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILD_DIR)\$(ASSEMBLY)
-	rm -rf $(OBJ_DIR)\$(ASSEMBLY)
+	rm -rf $(BUILD_DIR)/$(ASSEMBLY)
+	rm -rf $(OBJ_DIR)/$(ASSEMBLY)
 
 $(OBJ_DIR)/%.c.o: %.c
 	@echo   $<...
 	@clang $< $(COMPILER_FLAGS) -c -o $@ $(DEFINES) $(INCLUDE_FLAGS)
+
+-include $(OBJ_FILES:.o=.d)

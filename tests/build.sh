@@ -2,12 +2,11 @@ set echo on
 
 mkdir -p ../bin
 
-# Get a list of all the .c files.
 cFilenames=$(find . -type f -name "*.c")
 
-# echo "Files:" $cFilenames
+echo "Files:" $cFilenames
 
-assembly="test"
+assembly="tests"
 compilerFlags="-g -fdeclspec -fPIC" 
 # -fms-extensions 
 # -Wall -Werror

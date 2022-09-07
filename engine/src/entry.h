@@ -8,8 +8,6 @@
 extern b8 create_game(game* out_game);
 
 int main() {
-    initialize_memory();
-
     game game_inst;
     if(!create_game(&game_inst)) {
         SFATAL("Could not create game!");
@@ -30,8 +28,5 @@ int main() {
         SINFO("Application did not shutdown gracefully.");
         return 2;
     }
-
-    shutdown_memory();
-
     return 0;
 }

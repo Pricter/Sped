@@ -2,12 +2,12 @@ DIR := $(subst /,\,${CURDIR})
 BUILD_DIR := bin
 OBJ_DIR := obj
 
-ASSEMBLY := engine
-EXTENSION := .dll
-COMPILER_FLAGS := -g -MD -Werror=vla -fdeclspec #-fPIC
-INCLUDE_FLAGS := -Iengine\src -I$(VULKAN_SDK)\include
-LINKER_FLAGS := -g -shared -luser32 -lvulkan-1 -L$(VULKAN_SDK)\Lib -L$(OBJ_DIR)\engine
-DEFINES := -D_DEBUG -DSPEDEXPORT -D_CRT_SECURE_NO_WARNINGS
+ASSEMBLY := tests
+EXTENSION := .exe
+COMPILER_FLAGS := -g -MD -Werror=vla -Wno-missing-braces -fdeclspec #-fPIC
+INCLUDE_FLAGS := -Iengine\src -Itests\src 
+LINKER_FLAGS := -g -lengine.lib -L$(OBJ_DIR)\engine -L$(BUILD_DIR) #-Wl,-rpath,.
+DEFINES := -D_DEBUG -DSPEDIMPORT
 
 rwildcard=$(wildcard $1$2) $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2))
 
@@ -21,13 +21,12 @@ all: scaffold compile link
 scaffold:
 	@echo Scaffolding folder structure...
 	-@setlocal enableextensions enabledelayedexpansion && mkdir $(addprefix $(OBJ_DIR), $(DIRECTORIES)) 2>NUL || cd .
-	-@setlocal enableextensions enabledelayedexpansion && mkdir $(BUILD_DIR) 2>NUL || cd .
 	@echo Done.
 
 .PHONY: link
 link: scaffold $(OBJ_FILES)
 	@echo Linking $(ASSEMBLY)...
-	@clang $(OBJ_FILES) -o $(BUILD_DIR)\$(ASSEMBLY)$(EXTENSION) $(LINKER_FLAGS)
+	@clang $(OBJ_FILES) -o $(BUILD_DIR)/$(ASSEMBLY)$(EXTENSION) $(LINKER_FLAGS)
 
 .PHONY: compile
 compile:

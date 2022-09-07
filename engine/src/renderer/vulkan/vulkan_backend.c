@@ -134,7 +134,7 @@ b8 vulkan_renderer_backend_initialize(renderer_backend* backend, const char* app
 #endif
 
     SDEBUG("Creating Vulkan surface...");
-    if(!platform_create_vulkan_surface(plat_state, &context)) {
+    if(!platform_create_vulkan_surface(&context)) {
         SERROR("Failed to create platform surface.");
         return false;
     }

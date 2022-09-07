@@ -10,7 +10,16 @@ then
 echo "Error:"$ERRORLEVEL && exit
 fi
 
-pushd test
+pushd testbed
+source build.sh
+popd
+ERRORLEVEL=$?
+if [ $ERRORLEVEL -ne 0 ]
+then
+echo "Error:"$ERRORLEVEL && exit
+fi
+
+pushd testbeds
 source build.sh
 popd
 ERRORLEVEL=$?

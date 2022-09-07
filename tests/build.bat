@@ -2,16 +2,16 @@
 SetLocal EnableDelayedExpansion
 
 SET cFilenames=
-FOR /R %%f in (*.c) do (
-    SET cFilenames=!cFilenames! %%f
-)
+FOR /R %%f in (*.c) do (SET cFilenames=!cFilenames! %%f)
 
-SET assembly=test
-SET compilerFlags=-g 
-REM -Wall -Werror
+echo "Files:" %cFilenames%
+
+SET assembly=tests
+SET compilerFlags=-g -Wno-missing-braces
+REM -Wall -Werror -save-temps=obj -O0
 SET includeFlags=-Isrc -I../engine/src/
 SET linkerFlags=-L../bin/ -lengine.lib
-SET defines=-DKIMPORT
+SET defines=-D_DEBUG -DSPEDIMPORT
 
 ECHO "Building %assembly%%..."
 clang %cFilenames% %compilerFlags% -o ../bin/%assembly%.exe %defines% %includeFlags% %linkerFlags%

@@ -5,6 +5,7 @@
 typedef enum memory_tag {
     MEMORY_TAG_UNKNOWN,
     MEMORY_TAG_ARRAY,
+    MEMORY_TAG_LINEAR_ALLOCATOR,
     MEMORY_TAG_DARRAY,
     MEMORY_TAG_DICT,
     MEMORY_TAG_RING_QUEUE,
@@ -24,8 +25,8 @@ typedef enum memory_tag {
     MEMORY_TAG_MAX_TAGS,
 } memory_tag;
 
-SAPI void initialize_memory();
-SAPI void shutdown_memory();
+SAPI void memory_system_initialize(u64* memory_requirement, void* state);
+SAPI void memory_system_shutdown(void* state);
 
 SAPI void* sallocate(u64 size, memory_tag tag);
 SAPI void  sfree(void* block, u64 size, memory_tag tag);
@@ -33,3 +34,4 @@ SAPI void* szero_memory(void* block, u64 size);
 SAPI void* scopy_memory(void* dest, const void* source, u64 size);
 SAPI void* sset_memory(void* dest, i32 value, u64 size);
 SAPI char* get_memory_usage_str();
+SAPI u64 get_memory_alloc_count();

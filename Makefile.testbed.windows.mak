@@ -2,10 +2,10 @@ DIR := $(subst /,\,${CURDIR})
 BUILD_DIR := bin
 OBJ_DIR := obj
 
-ASSEMBLY := test
+ASSEMBLY := testbed
 EXTENSION := .exe
 COMPILER_FLAGS := -g -MD -Werror=vla -fdeclspec #-fPIC
-INCLUDE_FLAGS := -Iengine\src -Itestbed\src 
+INCLUDE_FLAGS := -Iengine\src -Itestbedbed\src 
 LINKER_FLAGS := -g -lengine.lib -L$(OBJ_DIR)\engine -L$(BUILD_DIR)
 DEFINES := -D_DEBUG -DSPEDIMPORT
 

@@ -52,7 +52,7 @@
   DICT        : 0.00B
   RING_QUEUE  : 0.00B
   BST         : 0.00B
-  STRING      : 1.80KiB
+  STRING      : 2.05KiB
   APPLICATION : 0.00B
   JOB         : 0.00B
   TEXTURE     : 0.00B
@@ -64,6 +64,39 @@
   ENTITY_NODE : 0.00B
   SCENE       : 0.00B
 
+[DEBUG]: 'D' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'S' key pressed in window.
+[DEBUG]: 'D' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'S' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'S' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'D' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'Q' key pressed in window.
+[DEBUG]: 'E' key pressed in window.
+[DEBUG]: 'S' key pressed in window.
+[DEBUG]: 'Q' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'Q' key pressed in window.
+[DEBUG]: 'Q' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'D' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'D' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'D' key pressed in window.
+[DEBUG]: 'W' key pressed in window.
+[DEBUG]: 'A' key pressed in window.
+[DEBUG]: 'S' key pressed in window.
 [INFO]:  EVENT_CODE_APPLICATION_QUIT Received. shutting down.
 
 [DEBUG]: Destroying Vulkan device...

@@ -373,13 +373,13 @@ SINLINE f32 vec4_dot_f32(
 
 // MAT4
 SINLINE mat4 mat4_identity() {
-    mat4 out_maxtrix;
-    szero_memory(out_maxtrix.data, sizeof(f32) * 16);
-    out_maxtrix.data[0] = 1.0f;
-    out_maxtrix.data[5] = 1.0f;
-    out_maxtrix.data[10] = 1.0f;
-    out_maxtrix.data[15] = 1.0f;
-    return out_maxtrix;
+    mat4 out_matrix;
+    szero_memory(out_matrix.data, sizeof(f32) * 16);
+    out_matrix.data[0] = 1.0f;
+    out_matrix.data[5] = 1.0f;
+    out_matrix.data[10] = 1.0f;
+    out_matrix.data[15] = 1.0f;
+    return out_matrix;
 }
 
 SINLINE mat4 mat4_mul(mat4 matrix_0, mat4 matrix_1) {
@@ -389,13 +389,13 @@ SINLINE mat4 mat4_mul(mat4 matrix_0, mat4 matrix_1) {
     const f32* m2_ptr = matrix_1.data;
     f32* dst_ptr = out_matrix.data;
 
-    for(i32 i = 0; i < 4; ++i) {
-        for(i32 j = 0; j < 4; ++j) {
+    for (i32 i = 0; i < 4; ++i) {
+        for (i32 j = 0; j < 4; ++j) {
             *dst_ptr =
                 m1_ptr[0] * m2_ptr[0 + j] +
                 m1_ptr[1] * m2_ptr[4 + j] +
-                m1_ptr[2] * m2_ptr[8 * j] +
-                m1_ptr[3] * m2_ptr[12 * j];
+                m1_ptr[2] * m2_ptr[8 + j] +
+                m1_ptr[3] * m2_ptr[12 + j];
             dst_ptr++;
         }
         m1_ptr += 4;
@@ -403,7 +403,7 @@ SINLINE mat4 mat4_mul(mat4 matrix_0, mat4 matrix_1) {
     return out_matrix;
 }
 
-SINLINE mat4 mat4_othrographic(f32 left, f32 right, f32 bottom, f32 top, f32 near_clip, f32 far_clip) {
+SINLINE mat4 mat4_orthographic(f32 left, f32 right, f32 bottom, f32 top, f32 near_clip, f32 far_clip) {
     mat4 out_matrix = mat4_identity();
 
     f32 lr = 1.0f / (left - right);
@@ -412,7 +412,7 @@ SINLINE mat4 mat4_othrographic(f32 left, f32 right, f32 bottom, f32 top, f32 nea
 
     out_matrix.data[0] = -2.0f * lr;
     out_matrix.data[5] = -2.0f * bt;
-    out_matrix.data[10] = -2.0f * nf;
+    out_matrix.data[10] = 2.0f * nf;
 
     out_matrix.data[12] = (left + right) * lr;
     out_matrix.data[13] = (top + bottom) * bt;
@@ -433,7 +433,7 @@ SINLINE mat4 mat4_perspective(f32 fov_radians, f32 aspect_ratio, f32 near_clip, 
 }
 
 SINLINE mat4 mat4_look_at(vec3 position, vec3 target, vec3 up) {
-    mat4 out_maxtrix;
+    mat4 out_matrix;
     vec3 z_axis;
     z_axis.x = target.x - position.x;
     z_axis.y = target.y - position.y;
@@ -443,24 +443,45 @@ SINLINE mat4 mat4_look_at(vec3 position, vec3 target, vec3 up) {
     vec3 x_axis = vec3_normalized(vec3_cross(z_axis, up));
     vec3 y_axis = vec3_cross(x_axis, z_axis);
 
-    out_maxtrix.data[0] = x_axis.x;
-    out_maxtrix.data[1] = y_axis.x;
-    out_maxtrix.data[2] = -z_axis.x;
-    out_maxtrix.data[3] = 0;
-    out_maxtrix.data[4] = x_axis.y;
-    out_maxtrix.data[5] = y_axis.y;
-    out_maxtrix.data[6] = -z_axis.z;
-    out_maxtrix.data[7] = 0;
-    out_maxtrix.data[8] = x_axis.z;
-    out_maxtrix.data[9] = y_axis.y;
-    out_maxtrix.data[10] = -z_axis.z;
-    out_maxtrix.data[11] = 0;
-    out_maxtrix.data[12] = -vec3_dot(x_axis, position);
-    out_maxtrix.data[13] = vec3_dot(y_axis, position);
-    out_maxtrix.data[14] = vec3_dot(z_axis, position);
-    out_maxtrix.data[15] = 1.0f;
+    out_matrix.data[0] = x_axis.x;
+    out_matrix.data[1] = y_axis.x;
+    out_matrix.data[2] = -z_axis.x;
+    out_matrix.data[3] = 0;
+    out_matrix.data[4] = x_axis.y;
+    out_matrix.data[5] = y_axis.y;
+    out_matrix.data[6] = -z_axis.y;
+    out_matrix.data[7] = 0;
+    out_matrix.data[8] = x_axis.z;
+    out_matrix.data[9] = y_axis.z;
+    out_matrix.data[10] = -z_axis.z;
+    out_matrix.data[11] = 0;
+    out_matrix.data[12] = -vec3_dot(x_axis, position);
+    out_matrix.data[13] = -vec3_dot(y_axis, position);
+    out_matrix.data[14] = vec3_dot(z_axis, position);
+    out_matrix.data[15] = 1.0f;
 
-    return out_maxtrix;
+    return out_matrix;
+}
+
+SINLINE mat4 mat4_transposed(mat4 matrix) {
+    mat4 out_matrix = mat4_identity();
+    out_matrix.data[0] = matrix.data[0];
+    out_matrix.data[1] = matrix.data[4];
+    out_matrix.data[2] = matrix.data[8];
+    out_matrix.data[3] = matrix.data[12];
+    out_matrix.data[4] = matrix.data[1];
+    out_matrix.data[5] = matrix.data[5];
+    out_matrix.data[6] = matrix.data[9];
+    out_matrix.data[7] = matrix.data[13];
+    out_matrix.data[8] = matrix.data[2];
+    out_matrix.data[9] = matrix.data[6];
+    out_matrix.data[10] = matrix.data[10];
+    out_matrix.data[11] = matrix.data[14];
+    out_matrix.data[12] = matrix.data[3];
+    out_matrix.data[13] = matrix.data[7];
+    out_matrix.data[14] = matrix.data[11];
+    out_matrix.data[15] = matrix.data[15];
+    return out_matrix;
 }
 
 SINLINE mat4 mat4_inverse(mat4 matrix) {
@@ -548,6 +569,7 @@ SINLINE mat4 mat4_euler_x(f32 angle_radians) {
     out_matrix.data[10] = c;
     return out_matrix;
 }
+
 SINLINE mat4 mat4_euler_y(f32 angle_radians) {
     mat4 out_matrix = mat4_identity();
     f32 c = scos(angle_radians);
@@ -559,6 +581,7 @@ SINLINE mat4 mat4_euler_y(f32 angle_radians) {
     out_matrix.data[10] = c;
     return out_matrix;
 }
+
 SINLINE mat4 mat4_euler_z(f32 angle_radians) {
     mat4 out_matrix = mat4_identity();
 
@@ -571,6 +594,7 @@ SINLINE mat4 mat4_euler_z(f32 angle_radians) {
     out_matrix.data[5] = c;
     return out_matrix;
 }
+
 SINLINE mat4 mat4_euler_xyz(f32 x_radians, f32 y_radians, f32 z_radians) {
     mat4 rx = mat4_euler_x(x_radians);
     mat4 ry = mat4_euler_y(y_radians);
@@ -703,6 +727,7 @@ SINLINE f32 quat_dot(quat q_0, quat q_1) {
 
 SINLINE mat4 quat_to_mat4(quat q) {
     mat4 out_matrix = mat4_identity();
+
 
     quat n = quat_normalize(q);
 

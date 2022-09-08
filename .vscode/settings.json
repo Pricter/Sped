@@ -69,6 +69,9 @@
         "stat.h": "c",
         "vulkan_object_shaderc": "c",
         "math_types.h": "c",
-        "vulkan_pipeline.h": "c"
+        "vulkan_pipeline.h": "c",
+        "renderer_backend.h": "c",
+        "renderer_types.inl": "c",
+        "sstream": "c"
     }
 }

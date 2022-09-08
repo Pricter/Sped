@@ -65,6 +65,9 @@
         "memory": "cpp",
         "limits": "cpp",
         "darray.h": "c",
-        "test_manager.h": "c"
+        "test_manager.h": "c",
+        "stat.h": "c",
+        "vulkan_object_shaderc": "c",
+        "math_types.h": "c"
     }
 }

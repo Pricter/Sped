@@ -68,6 +68,7 @@
         "test_manager.h": "c",
         "stat.h": "c",
         "vulkan_object_shaderc": "c",
-        "math_types.h": "c"
+        "math_types.h": "c",
+        "vulkan_pipeline.h": "c"
     }
 }

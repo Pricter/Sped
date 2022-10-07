@@ -15,7 +15,7 @@ b8 create_shader_module(
     vulkan_shader_stage* shader_stages) {
 
     char file_name[512];
-    string_format(file_name, "bin/assets/shaders/%s.%s.spv", name, type_str);
+    string_format(file_name, "assets/shaders/%s.%s.spv", name, type_str);
 
     szero_memory(&shader_stages[stage_index].create_info, sizeof(VkShaderModuleCreateInfo));
     shader_stages[stage_index].create_info.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;

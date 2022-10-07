@@ -10,3 +10,12 @@ void renderer_on_resized(u16 width, u16 height);
 b8 renderer_draw_frame(render_packet* packet);
 
 SAPI void renderer_set_view(mat4 view);
+
+void create_texture(const char* name,
+                    b8 auto_release,
+                    i32 width, i32 height,
+                    i32 channel_count,
+                    const u8* pixels,
+                    b8 has_transparency,
+                    struct texture* out_texture);
+void destroy_texture(struct texture* texture);

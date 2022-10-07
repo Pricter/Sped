@@ -57,7 +57,7 @@ b8 vulkan_object_shader_create(vulkan_context* context, vulkan_object_shader* ou
     scissor.extent.height = context->framebuffer_height;
 
     u32 offset = 0;
-    const i32 attribute_count = 1;
+    enum { attribute_count = 1 };
     VkVertexInputAttributeDescription attribute_descriptions[attribute_count];
     VkFormat formats[attribute_count] = {
         VK_FORMAT_R32G32B32_SFLOAT};
